@@ -52,13 +52,13 @@ mongoose
   });
 
 
+module.exports = app;
 
+// app.listen(process.env.port,(err)=>{
+//     if(err){
+//         console.log("can't listen on the port");
+//     }else{
+//         console.log("listen on port successfully");
+//     }
 
-app.listen(process.env.port,(err)=>{
-    if(err){
-        console.log("can't listen on the port");
-    }else{
-        console.log("listen on port successfully");
-    }
-
-});
+// });

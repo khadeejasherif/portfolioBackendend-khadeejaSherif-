@@ -16,6 +16,35 @@ app.use(cors());
 ///middleware//express
 app.use(express.json());
 
+
+
+
+// 1. IMPROVED DATABASE CONNECTION
+const connectDB = async () => {
+  if (mongoose.connection.readyState >= 1) return;
+
+  await mongoose.connect(process.env.mongoUrl);
+};
+// 2. CONNECT BEFORE PROCESSING
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    return res.status(500).json({
+      message: "Database connection failed",
+      error: err.message,
+    });
+  }
+});
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "Backend is running",
+    mongoConnected: mongoose.connection.readyState,
+  });
+});
+
 // endpoints /ROUTES//
 app.use("/projects",projectRouter)
 app.use("/api/users", userRoutes);  
@@ -52,22 +81,7 @@ app.use((req, res, next) => {
 //     console.log("cant connect to mongo",err);
 //   });
 
-// 1. IMPROVED DATABASE CONNECTION
-const connectDB = async () => {
-  if (mongoose.connection.readyState >= 1) return;
-  try {
-    await mongoose.connect(process.env.mongoUrl);
-    console.log("Connected to MongoDB successfully");
-  } catch (err) {
-    console.error("Cannot connect to MongoDB", err);
-  }
-};
 
-// 2. CONNECT BEFORE PROCESSING
-app.use(async (req, res, next) => {
-  await connectDB();
-  next();
-});
 // 3. EXPORT FOR VERCEL (Remove app.listen)
 module.exports = app;
 

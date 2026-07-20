@@ -3,7 +3,7 @@ const cvRouter = express.Router();
 const { getCv, uploadCv } = require('../controllers/cv')
 const { isAuth } = require('../middleware/isAuth');
 const { isAdmin } = require('../middleware/iaAdmin');
-const { upload } = require('../config/cloudinaryConfig');
+const { upload } = require('../config/cloudinaryconfig');
 
 // Public route: Everyone can access the viewing link
 cvRouter.get('/', getCv);

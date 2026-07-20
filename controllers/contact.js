@@ -1,4 +1,4 @@
-const { contactModel } = require("../models/Contact");
+const { contactModel } = require("../models/contact");
 const crud = require("./crud");
 const sendEmail = require("../utils/sendEmail");
 

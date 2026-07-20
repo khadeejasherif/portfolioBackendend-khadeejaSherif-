@@ -79,14 +79,14 @@ app.use((req, res, next) => {
 //   .catch((err) => {
 //     console.log("cant connect to mongo",err);
 //   });
-app.listen(process.env.port,(err)=>{
-    if(err){
-        console.log("can't listen on the port");
-    }else{
-        console.log("listen on port successfully");
-    }
+// app.listen(process.env.port,(err)=>{
+//     if(err){
+//         console.log("can't listen on the port");
+//     }else{
+//         console.log("listen on port successfully");
+//     }
 
-});
+// });
 
 // 3. EXPORT FOR VERCEL (Remove app.listen)
 module.exports = app;

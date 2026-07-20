@@ -53,8 +53,7 @@ app.use('/api/cv', cvRouter);
 app.use('/services',serviceRoutes);
 app.use('/Skills',skillsRoutes);
 app.use('/contactUs',contactRouter);
-app.get('/favicon.ico', (req, res) => res.status(204).end());
-app.get('/favicon.png', (req, res) => res.status(204).end());
+
 
 
 //========error handling======/

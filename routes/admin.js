@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../models/User");
+const User = require("../models/user");
 const { isAuth} = require("../middleware/isAuth");
 const { isAdmin }=require("../middleware/iaAdmin");
 const { getUsers,deleteUsers,updateUsers,login,addUser,getLoggedInProfile,getUser }=require('../controllers/user');

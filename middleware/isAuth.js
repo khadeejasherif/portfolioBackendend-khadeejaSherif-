@@ -12,7 +12,7 @@ async function isAuth(req, res, next) {
 
   try {
     // Verify the token
-    let decode = await promisify(jwt.verify)(token, process.env.SECRET);
+    let decode = await promisify(jwt.verify)(token, process.env.secret);
 
     console.log("Decoded Token Data:", decode);
     const freshUser = await userModel.findById(decode.id);

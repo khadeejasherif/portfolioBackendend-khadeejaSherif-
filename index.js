@@ -40,19 +40,38 @@ app.use((req, res, next) => {
 
 
 //db connection to mongo
-mongoose
-  .connect(
-    process.env.mongoUrl,
-  )
-  .then(() => {
-    console.log("connected to MONGO DB successfully ");
-  })
-  .catch((err) => {
-    console.log("cant connect to mongo",err);
-  });
+// mongoose
+//   .connect(
+//     process.env.mongoUrl,
+//   )
+//   .then(() => {
+//     console.log("connected to MONGO DB successfully ");
+//   })
+//   .catch((err) => {
+//     console.log("cant connect to mongo",err);
+//   });
 
+// 1. IMPROVED DATABASE CONNECTION
+const connectDB = async () => {
+  if (mongoose.connection.readyState >= 1) return;
+  try {
+    await mongoose.connect(process.env.mongoUrl);
+    console.log("Connected to MongoDB successfully");
+  } catch (err) {
+    console.error("Cannot connect to MongoDB", err);
+  }
+};
 
+// 2. CONNECT BEFORE PROCESSING
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
+// 3. EXPORT FOR VERCEL (Remove app.listen)
 module.exports = app;
+
+
+
 
 // app.listen(process.env.port,(err)=>{
 //     if(err){
